@@ -12,17 +12,50 @@ fun Application.configureRouting() {
     }
 
     //this is where all routing in the server project are defined
-    routing {
+    routing() {
         get("/") {
             call.respondText("Hello World!", contentType = ContentType.Text.Plain)
 
         }
 
-        //localhost:8080/notes
-        post("/notes") {
-            //in a post request we have to receive a body, thus below is how to define the expected body to receive
-
+        //path parameters
+        get("/note/{id}"){
+            val id = call.parameters["id"]
+            call.respond(id.toString())
         }
+
+        //query parameters
+        get("/note") {
+            val id = call.request.queryParameters["id"]
+            call.respond(id.toString())
+        }
+
+        post ("/note") {
+            //in a post request we have to receive a body, thus below is how to define the expected body to receive
+            val body = call.receive<String>()
+            call.respond(body)//passes the defines body in the response
+        }
+
+        // the parameters can be passed for two routes with the same path in this format
+        route("/notes"){
+
+            //route nesting
+            route("/create"){
+                //localhost:8080/notes
+                post {
+                    //in a post request we have to receive a body, thus below is how to define the expected body to receive
+                    val body = call.receive<String>()
+                    call.respond(body)//passes the defines body in the response
+                }
+            }
+
+
+            delete {
+                val body = call.receive<String>()
+                call.respond(body)
+            }
+        }
+
 
     }
 }
