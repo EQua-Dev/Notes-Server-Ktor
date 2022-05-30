@@ -1,5 +1,9 @@
 package com.devstrike.plugins
 
+import com.devstrike.authentication.JWTService
+import com.devstrike.authentication.hash
+import com.devstrike.data.model.UserModel
+import com.devstrike.repository.repo
 import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.server.locations.*
@@ -10,6 +14,10 @@ import io.ktor.server.request.*
 fun Application.configureRouting() {
     install(Locations) {
     }
+
+    val db = repo()
+    val jwtService = JWTService()
+    val hashFunction = {s: String -> hash(s)}
 
     //this is where all routing in the server project are defined
     routing() {
@@ -22,6 +30,19 @@ fun Application.configureRouting() {
         get("/note/{id}"){
             val id = call.parameters["id"]
             call.respond(id.toString())
+        }
+
+        get("/token") {
+            //collect the parameters entered by the user and store to variables
+            val email = call.request.queryParameters["email"]!!
+            val password = call.request.queryParameters["password"]!!
+            val username = call.request.queryParameters["username"]!!
+
+
+            val user = UserModel(email, hashFunction(password), username)
+
+            //return the token to the user in the response body
+            call.respond(jwtService.generateToken(user))
         }
 
         //query parameters

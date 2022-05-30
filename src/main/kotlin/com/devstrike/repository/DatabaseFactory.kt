@@ -1,10 +1,12 @@
 package com.devstrike.repository
 
+import com.devstrike.data.table.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
 //import org.jetbrains.exposed.sql.Database
@@ -15,6 +17,11 @@ object DatabaseFactory {
     //function to connect to our database using the datasource below
     fun init() {
         Database.connect(hikari())
+
+        //transaction to create the user table in the database
+        transaction {
+            SchemaUtils.create(UserTable)
+        }
     }
 
     //function to provide us with the data source of our database
