@@ -1,5 +1,6 @@
 package com.devstrike.repository
 
+import com.devstrike.data.table.NoteTable
 import com.devstrike.data.table.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -21,6 +22,7 @@ object DatabaseFactory {
         //transaction to create the user table in the database
         transaction {
             SchemaUtils.create(UserTable)
+            SchemaUtils.create(NoteTable)
         }
     }
 
