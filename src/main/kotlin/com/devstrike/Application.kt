@@ -6,8 +6,9 @@ import com.devstrike.plugins.*
 
 fun main() {
 
-    val port = System.getenv("PORT").toInt()
-    embeddedServer(Netty, port = port , host = "localhost") {
+    //val port = System.getenv("PORT").toInt()
+    embeddedServer(Netty)
+    {
 
         configureRouting()
         configureSerialization()
