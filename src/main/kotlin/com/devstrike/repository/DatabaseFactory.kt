@@ -40,12 +40,14 @@ object DatabaseFactory {
         val username = uri.userInfo.split(":").toTypedArray()[0]
         val password = uri.userInfo.split(":").toTypedArray()[1]
 
-        config.jdbcUrl = "jdbc:postgresql://" + uri.host + uri.path + "?sslmode=require" + "&user=$username&password=$password"
+//        config.jdbcUrl = "jdbc:postgresql://" + uri.host + uri.path + "?sslmode=require" + "&user=$username&password=$password"
 
         config.validate()
 
         return HikariDataSource(config)
     }
+
+//    postgres://wnlnntnhcuesxv:03262494b297ed9facb5c7daeed8c87df3bb80fd1bb495ba76abf41d29aa3b95@ec2-34-231-221-151.compute-1.amazonaws.com:5432/db9nml45lfg8vl
 
 
     //suspend function to perform queries in coroutines scope
