@@ -5,7 +5,9 @@ import io.ktor.server.netty.*
 import com.devstrike.plugins.*
 
 fun main() {
-    embeddedServer(Netty, port = 8000, host = "localhost") {
+
+    val port = System.getenv("PORT").toInt()
+    embeddedServer(Netty, port = port , host = "localhost") {
 
         configureRouting()
         configureSerialization()
