@@ -67,7 +67,7 @@ fun Application.module(testing: Boolean = false)
 
         //this is where all routing in the server project are defined
         routing() {
-                get("/") {
+                get("/home") {
                         call.respondText("Hello World!", contentType = io.ktor.http.ContentType.Text.Plain)
 
                 }
