@@ -9,6 +9,7 @@ val h2_version: String by project
 plugins {
     application
     kotlin("jvm") version "1.6.21"
+
 }
 
 group = "com.devstrike"
@@ -16,9 +17,16 @@ version = "0.0.1"
 application {
     mainClass.set("com.devstrike.ApplicationKt")
 
+
+
+
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
+//sourceSets {
+//    main.kotlin.srcDirs = [ 'src/main/kotlin' ]
+//    main.resources.srcDirs = [ 'src/main/resource' ]
+//}
 
 tasks.create("stage"){
     dependsOn("installDist")
@@ -28,6 +36,7 @@ repositories {
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 }
+
 
 dependencies {
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")

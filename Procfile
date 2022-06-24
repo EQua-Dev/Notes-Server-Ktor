@@ -1,1 +1,2 @@
-web: build/install/com.devstrike.notes-server-ktor/bin/com.devstrike.notes-server-ktor -Dhttp.port=$PORT
+web: build/install/devstrike.notes-server-ktor/bin/devstrike.notes-server-ktor
+

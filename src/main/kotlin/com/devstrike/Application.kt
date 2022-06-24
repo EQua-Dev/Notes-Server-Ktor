@@ -72,6 +72,7 @@ fun Application.module(testing: Boolean = false)
 
                 }
 
+
                 UserRoutes(db, jwtService, hashFunction)
                 NoteRoutes(db, hashFunction)
 
