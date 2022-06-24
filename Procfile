@@ -1,2 +1,2 @@
-web: build/install/devstrike.notes-server-ktor/bin/devstrike.notes-server-ktor
+web: build/install/com.devstrike.notes-server-ktor/bin/com.devstrike.notes-server-ktor
 
